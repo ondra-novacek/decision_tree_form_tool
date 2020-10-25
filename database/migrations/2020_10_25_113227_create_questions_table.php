@@ -13,16 +13,16 @@ class CreateQuestionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('questions', function (Blueprint $table) {
+        Schema::create('dt_questions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('text');
-            $table->boolean('isRoot');
-            $table->integer('answerDependency_id');
-            $table->integer('questionType_id');
-            $table->integer('user_id');
+            $table->boolean('isRoot')->nullable();
+            $table->integer('questionType_id')->unsigned();
+            $table->integer('survey_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('survey_id')->references('id')->on('dt_surveys');
+            $table->foreign('questionType_id')->references('id')->on('dt_q_types');
         });
     }
 
@@ -33,6 +33,6 @@ class CreateQuestionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('questions');
+        Schema::dropIfExists('dt_questions');
     }
 }
