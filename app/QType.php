@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class QTypes extends Model
+class QType extends Model
 {
     protected $table = 'dt_q_types';
 }

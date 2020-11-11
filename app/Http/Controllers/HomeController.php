@@ -1,15 +1,32 @@
-<?php namespace App\Http\Controllers;
+<?php
 
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers;
 
-class HomeController extends Controller {
+use Illuminate\Http\Request;
+
+class HomeController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
-     * Show the profile for the given user.
+     * Show the application dashboard.
      *
-     * @param  int  $id
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
+    public function index()
+    {
+        return view('home.vueapp');
+    }
+
+
     public function default()
     {
         return view('home.default', ['user' => 1]);
@@ -20,5 +37,4 @@ class HomeController extends Controller {
     {
         return view('home.vueapp');
     }
-
 }

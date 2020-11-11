@@ -1,23 +1,36 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Example Component</div>
-
-                    <div class="panel-body">
-                        I'm an example component!
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div>
+      
     </div>
 </template>
 
 <script>
+    import EventBus from '../event-bus.js';
+    // import NewSurvey from './NewSurvey.vue';
+
     export default {
-        mounted() {
-            console.log('Component mounted.')
+        components: {
+            // 'new-survey' : NewSurvey
+        },
+        props: {
+            // surveyData: Object
+        },
+        data() {
+            return {
+                // neco: [],
+                // textInput: '',
+            }
+        }
+        , methods: {
+            refresh(){
+
+            }
+        }
+        , mounted() {
+            // refresh
+            EventBus.$on('refresh', () => {this.refresh()});
+            // alert
+            // EventBus.$on('showAlert', (type, message) => {this.handleAlert(type, message)});
         }
     }
 </script>

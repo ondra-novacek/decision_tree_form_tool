@@ -15,5 +15,9 @@
 //     return view('welcome');
 // });
 
-Route::get('/', 'HomeController@default');
-Route::get('/vue', 'HomeController@vueapp');
+Route::get('/', 'HomeController@vueapp');
+// Route::get('/vue', 'HomeController@vueapp');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

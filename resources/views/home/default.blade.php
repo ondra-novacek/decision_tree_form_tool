@@ -1,1 +1,1 @@
-home defaukt
+home default
