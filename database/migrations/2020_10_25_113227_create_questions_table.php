@@ -21,8 +21,8 @@ class CreateQuestionsTable extends Migration
             $table->integer('survey_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('survey_id')->references('id')->on('dt_surveys');
-            $table->foreign('questionType_id')->references('id')->on('dt_q_types');
+            $table->foreign('survey_id')->references('id')->on('dt_surveys')->onDelete('cascade');
+            $table->foreign('questionType_id')->references('id')->on('dt_q_types')->onDelete('cascade');
         });
     }
 
@@ -33,6 +33,10 @@ class CreateQuestionsTable extends Migration
      */
     public function down()
     {
+        Schema::table('dt_questions', function (Blueprint $table) {
+            $table->dropForeign('dt_questions_survey_id_foreign');
+            $table->dropForeign('dt_questions_questionType_id_foreign');
+        });
         Schema::dropIfExists('dt_questions');
     }
 }

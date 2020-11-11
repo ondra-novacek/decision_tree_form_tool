@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class CreateUsersTable extends Migration
 {
@@ -18,9 +20,24 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('api_token', 80)
+                        ->unique()
+                        ->nullable()
+                        ->default(null);
             $table->rememberToken();
             $table->timestamps();
         });
+
+        DB::table('dt_users')->insert(
+            [
+                [
+                    'name' => 'admin',
+                    'email' => 'admin@admin.admin',
+                    'password' => bcrypt('admin'),
+                    'api_token' => Str::random(60),
+                ]
+            ]
+        );
     }
 
     /**

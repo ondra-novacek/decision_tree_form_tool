@@ -19,7 +19,7 @@ class CreateAnswersTable extends Migration
             $table->integer('survey_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('survey_id')->references('id')->on('dt_surveys');
+            $table->foreign('survey_id')->references('id')->on('dt_surveys')->onDelete('cascade');
         });
     }
 
@@ -30,6 +30,9 @@ class CreateAnswersTable extends Migration
      */
     public function down()
     {
+        Schema::table('dt_answers', function (Blueprint $table) {
+            $table->dropForeign('dt_answers_survey_id_foreign');
+        });
         Schema::dropIfExists('dt_answers');
     }
 }
