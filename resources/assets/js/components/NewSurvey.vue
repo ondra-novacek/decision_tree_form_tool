@@ -1,14 +1,16 @@
 <template>
     <div>
-        Create new survey:
         <form @submit.prevent="newSurvey()">
-            <label for="survey-name">
-                <input type="text" name="name" id="survey-name" v-model="surveyName">
-            </label>
-            <input type="submit" value="Create new">
-        </form>
+            <div class="form-row align-items-center">
+                <div class="col-auto">
+                <input type="text" class="form-control mb-2"  name="name" id="survey-name" v-model="surveyName" placeholder="Enter survey name...">
+                </div>
 
-        <!-- <input type="button" value="test new sur" @click="test()"> -->
+                <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-2">Add</button>
+                </div>
+            </div>
+        </form>
     </div>
 </template>
 
@@ -34,6 +36,7 @@
                     user_id: this.$store.state.user.id
                 }).then((r) => {
                     EventBus.$emit('showAlert', 'success', 'Survey succesfully created.');
+                    this.surveyName = '';
                     EventBus.$emit('refresh');
                 }).catch((e) => {
                     EventBus.$emit('showAlert', 'danger', 'Something went wrong.');

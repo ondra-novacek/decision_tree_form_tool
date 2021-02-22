@@ -4,6 +4,6 @@
 
 @section('content')
     <div id="app">
-        <main-component :user={{Auth::user()}}></main-component>
+        <router-view :user={{Auth::user()}}></router-view>
     </div>    
 @endsection

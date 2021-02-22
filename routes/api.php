@@ -27,10 +27,16 @@ Route::apiResources([
     'qtype' => QTypeController::class,
     'survey' => SurveyController::class,
     'question' => QuestionController::class,
+    'answer' => AnswerController::class
 ]);
 
 Route::get('survey2', 'SurveyController@index');
 Route::get('possibleanswers/{id}', 'SurveyController@possibleAnswers');
+Route::get('parentanswer/{id}', 'QuestionController@getParentAnswer');
+Route::get('answers/{id}', 'QuestionController@getAnswers');
+Route::get('surveydata/{id}', 'SurveyController@getSurveyApi');
+
+Route::get('decisiontree/{id}', 'SurveyController@decisionTree');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/user3', 'UserController@GetLoggedUser');
